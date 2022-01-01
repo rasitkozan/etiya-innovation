@@ -21,3 +21,18 @@ eureka:
       hostname: localhost
     serviceUrl:
       defaultZone: http://localhost:8500/eureka/
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      failureRateThreshold: 50
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowSize: 10
+      waitDurationInOpenState: 10
+      slidingWindowType: COUNT_BASED
+  instances:
+    backendA:
+      baseConfig: default
